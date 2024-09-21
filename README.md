@@ -15,23 +15,23 @@ Helm Values Manager is a Go-based tool for merging multiple Helm values files, t
 
 1. Clone this repository:
 
-   \`\`\`bash
+   ```bash
    git clone https://github.com/mwojciga/helm-values-manager.git
    cd helm-values-manager
-   \`\`\`
+   ```
 
 2. Install dependencies and compile the Go program:
 
-   \`\`\`bash
+   ```bash
    go mod tidy
    go build
-   \`\`\`
+   ```
 
 3. (Optional) Run the software without building:
 
-   \`\`\`bash
+   ```bash
    go run main.go <base-values-file> <override-values-file> <additional-override-files>
-   \`\`\`
+   ```
 
 ## Usage
 
@@ -43,45 +43,45 @@ Assume you have the following Helm values files:
 
 1. **Base file (`values.yaml`)**:
 
-   \`\`\`yaml
+   ```yaml
    thanos:
      store:
        resources:
          requests:
            cpu: 500m
-   \`\`\`
+   ```
 
 2. **Override file 1 (`values2.yaml`)**:
 
-   \`\`\`yaml
+   ```yaml
    thanos:
      store:
        resources:
          requests:
            cpu: 1
-   \`\`\`
+   ```
 
 3. **Override file 2 (`values3.yaml`)**:
 
-   \`\`\`yaml
+   ```yaml
    thanos:
      store:
        resources:
          requests:
            memory: 6Gi
-   \`\`\`
+   ```
 
 Run the program with:
 
-\`\`\`bash
+```bash
 go run main.go values.yaml values2.yaml values3.yaml
-\`\`\`
+```
 
 ### Output
 
 The tool will output something like:
 
-\`\`\`
+```
 --- Override and Final Values Log ---
 Key .thanos.store.resources.requests.cpu:
   Base value: 500m
@@ -93,7 +93,7 @@ Key .thanos.store.resources.requests.memory:
   Override value: 6Gi (values3.yaml)
   Final value: 6Gi
 ---
-\`\`\`
+```
 
 ### Options and Commands
 
@@ -104,17 +104,17 @@ Key .thanos.store.resources.requests.memory:
 
 - **Scalars**: Simple key-value pairs like `cpu: 500m`.
 - **Lists**: Supports YAML lists like:
-  \`\`\`yaml
+  ```yaml
   items:
     - item1
     - item2
-  \`\`\`
+  ```
 - **Maps**: Nested YAML structures like:
-  \`\`\`yaml
+  ```yaml
   resources:
     requests:
       cpu: 500m
-  \`\`\`
+  ```
 
 ## Error Handling
 
